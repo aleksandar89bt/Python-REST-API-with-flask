@@ -14,11 +14,6 @@ app.secret_key = "AleksandarSecret"
 api = Api(app)
 
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
-
 # change token endpoint to be /login, default is /auth
 app.config['JWT_AUTH_URL_RULE'] = '/login'
 # change expiration time of token to half an hour, default is 5 minutes
