@@ -1,3 +1,5 @@
+import os
+
 from datetime import timedelta
 
 from flask import Flask, jsonify
@@ -19,7 +21,7 @@ app.config['JWT_AUTH_URL_RULE'] = '/login'
 # change expiration time of token to half an hour, default is 5 minutes
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 jwt = JWT(app, authenticate, identity_function)
 
 
